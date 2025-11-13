@@ -425,7 +425,7 @@ a:visited {
   background: #f1f1f1;
 }
 /* Carousel navigation */
-.prev-btn,
+/* .prev-btn,
 .next-btn {
   position: absolute;
   top: 50%;
@@ -436,15 +436,15 @@ a:visited {
   padding: 10px 15px;
   cursor: pointer;
   border-radius: 50%;
-}
+} */
 
-.prev-btn {
+/* .prev-btn {
   margin-right: 10px;
 }
 
 .next-btn {
   margin-left: 10px;
-}
+} */
 /* ====== Student Grid ====== */
 .students-list {
   display: flex;
