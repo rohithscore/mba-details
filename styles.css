@@ -1,5 +1,5 @@
 /* ===================================
-   RESET & BASE STYLES
+  RESET & BASE STYLES
 =================================== */
 * {
   margin: 0;
@@ -13,7 +13,7 @@ body {
 }
 
 /* ===================================
-   NAVBAR STYLES
+  NAVBAR STYLES
 =================================== */
 header {
   background-color: #2bb2f0;
@@ -49,7 +49,7 @@ nav ul li a {
 }
 
 /* ===================================
-   DASHBOARD STYLES
+  DASHBOARD STYLES
 =================================== */
 .container {
   width: 90%;
@@ -65,7 +65,7 @@ nav ul li a {
 }
 
 /* ===================================
-   STUDENT CARD STYLES
+  STUDENT CARD STYLES
 =================================== */
 .student-container {
   width: 180px;
@@ -108,7 +108,7 @@ nav ul li a {
 }
 
 /* ===================================
-   MODAL (STUDENT DETAILS)
+  MODAL (STUDENT DETAILS)
 =================================== */
 .modal {
   display: none;
@@ -134,6 +134,7 @@ nav ul li a {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   animation: fadeIn 0.3s ease;
 }
+
 .modal-content img {
   width: 150px;
   height: 200px;
@@ -142,17 +143,20 @@ nav ul li a {
   margin-bottom: 10px;
   border: 2px solid #2bb2f0;
 }
+
 .modal-content h2 {
   color: #2b56af;
   font-size: 20px;
   margin-bottom: 8px;
 }
+
 .modal-content p {
   font-weight: bold;
   font-size: 16px;
   color: #553ddd;
   margin-bottom: 8px;
 }
+
 /* Close button */
 .close-btn {
   position: absolute;
@@ -173,7 +177,7 @@ nav ul li a {
 }
 
 /* ===================================
-   SEMESTER CAROUSEL
+  SEMESTER CAROUSEL
 =================================== */
 .semester-carousel {
   position: relative;
@@ -181,8 +185,7 @@ nav ul li a {
   margin-top: 15px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 10px;
+  justify-content: space-between;
 }
 
 .semester-arrow {
@@ -202,8 +205,9 @@ nav ul li a {
   background: white;
   padding: 15px;
   border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
+
 .semester-content table {
   width: 100%;
   border-collapse: collapse;
@@ -212,22 +216,27 @@ nav ul li a {
 
 .semester-content th,
 .semester-content td {
-  border: 1px solid #333; /* table borders */
+  border: 1px solid #333;
+  /* table borders */
   padding: 8px;
   text-align: center;
 }
 
 .semester-content th {
-  background-color: #4CAF50; /* header background */
-  color: white; /* header text color */
+  background-color: #4CAF50;
+  /* header background */
+  color: white;
+  /* header text color */
 }
 
 .semester-content tr:nth-child(even) {
-  background-color: #f2f2f2; /* striped rows */
+  background-color: #f2f2f2;
+  /* striped rows */
 }
 
 .semester-content tr:hover {
-  background-color: #ddd; /* hover effect */
+  background-color: #ddd;
+  /* hover effect */
 }
 
 .semester-content p {
@@ -241,13 +250,14 @@ nav ul li a {
 }
 
 /* ===================================
-   ANIMATIONS
+  ANIMATIONS
 =================================== */
 @keyframes fadeIn {
   from {
     opacity: 0;
     transform: translateY(-20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -255,7 +265,7 @@ nav ul li a {
 }
 
 /* ===================================
-   COLLEGE DETAILS
+  COLLEGE DETAILS
 =================================== */
 .college-details {
   list-style-type: none;
@@ -296,7 +306,7 @@ nav ul li a {
 }
 
 /* ===================================
-   FOOTER
+  FOOTER
 =================================== */
 footer.fixed-footer {
   position: fixed;
@@ -326,7 +336,7 @@ footer p {
 }
 
 /* ===================================
-   RESPONSIVE DESIGN
+  RESPONSIVE DESIGN
 =================================== */
 @media (max-width: 1024px) {
   .student-container {
@@ -361,11 +371,13 @@ a:visited {
   height: 80vh;
   overflow-y: auto;
 }
+
 */ .students-list {
   display: flex;
   flex-direction: column;
   gap: 25px;
 }
+
 .row-container {
   display: flex;
   justify-content: center;
@@ -381,13 +393,15 @@ a:visited {
   gap: 2px;
   padding: 10px 0;
 }
+
 /* ===================================
-   TABLE STYLES
+  TABLE STYLES
 =================================== */
 .table-wrapper {
-  min-width: 300px; 
+  min-width: 300px;
   flex-shrink: 0;
 }
+
 .marks-table {
   width: 100%;
   border-collapse: collapse;
@@ -397,33 +411,40 @@ a:visited {
   border-radius: 8px;
   overflow: hidden;
 }
+
 .marks-table th {
   background-color: #007bff;
   color: #fff;
   padding: 10px;
   text-align: center;
 }
+
 .marks-table td {
   padding: 8px;
   text-align: center;
-  border-bottom: 1px solid #ddd; 
+  border-bottom: 1px solid #ddd;
 }
+
 /* CGPA row styling */
 .marks-table .cgpa-row {
   background-color: #e9f7ef;
   font-weight: bold;
 }
+
 /* Scrollbar styling (optional) */
 .tables-scroll::-webkit-scrollbar {
   height: 8px;
 }
+
 .tables-scroll::-webkit-scrollbar-thumb {
   background-color: #007bff;
   border-radius: 4px;
 }
+
 .tables-scroll::-webkit-scrollbar-track {
   background: #f1f1f1;
 }
+
 /* Carousel navigation */
 /* .prev-btn,
 .next-btn {
@@ -453,6 +474,7 @@ a:visited {
   justify-content: center;
   margin-top: 20px;
 }
+
 .modal-content .close:hover {
   color: red;
 }

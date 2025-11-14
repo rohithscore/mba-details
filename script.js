@@ -93,7 +93,11 @@ document.addEventListener("DOMContentLoaded", function () {
       <p><strong>Total:</strong> ${results.obtainedMarks}/${results.totalMarks}</p>
       <p><strong>Percentage:</strong> ${results.percentage}%</p>
     `;
-    semesterCarousel.appendChild(semDiv);
+    semesterCarousel.insertBefore(
+    semDiv,
+    semesterCarousel.querySelector(".semester-arrow.right")
+);
+
   }
 
   // Change semester
