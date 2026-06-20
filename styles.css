@@ -71,18 +71,29 @@ nav ul li a {
   width: 180px;
   text-align: center;
   background-color: #fff;
-  border: 1px solid #ddd;
+  border: 3px solid #2bb2f0;
   border-radius: 10px;
   padding: 15px;
   margin: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1), 0 0 10px rgba(43, 178, 240, 0.5);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
+  animation: cardGlow 3s ease-in-out infinite alternate;
 }
 
 .student-container:hover {
   transform: scale(1.05);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2), 0 0 20px rgba(43, 178, 240, 0.8);
+}
+
+.rohan-card {
+  border-color: #5af114;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1), 0 0 10px rgba(255, 107, 53, 0.5);
+  animation: rohanGlow 3s ease-in-out infinite alternate;
+}
+
+.rohan-card:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2), 0 0 20px rgba(255, 107, 53, 0.8);
 }
 
 .student-container img {
@@ -105,6 +116,11 @@ nav ul li a {
 .student-container p {
   font-size: 14px;
   color: #555;
+}
+
+.name-char {
+  display: inline-block;
+  animation: rotateName 3s linear infinite;
 }
 
 /* ===================================
@@ -131,8 +147,9 @@ nav ul li a {
   text-align: center;
   width: 80%;
   max-width: 600px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  animation: fadeIn 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 0 20px rgba(43, 178, 240, 0.8), 0 0 40px rgba(43, 178, 240, 0.6);
+  border: 3px solid #2bb2f0;
+  animation: fadeIn 0.3s ease, glow 2s ease-in-out infinite alternate;
 }
 
 .modal-content img {
@@ -185,27 +202,52 @@ nav ul li a {
   margin-top: 15px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+  flex-wrap: wrap;
 }
 
 .semester-arrow {
-  font-size: 1.5rem;
-  background: none;
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  color: white;
   border: none;
   cursor: pointer;
-} 
+  border-radius: 30px;
+  padding: 12px 22px;
+  font-size: 15px;
+  font-weight: 600;
+  min-width: 160px;
+  transition: 0 4px 10px rgba(0, 123, 255, 0.3);
+}
 
-/* .semester-content {
-  min-width: 300px;
-} */
+.semester-arrow:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #0056b3, #003f88);
+  box-shadow: 0 6px 15px rgba(0, 123, 255, 0.4);
+}
+
+.semester-arrow:active {
+  transform: scale(0.97);
+}
+
+.semester-arrow:disabled {
+  background: #cfd8dc;
+  color: #666;
+  cursor: not-allowed;
+  box-shadow: none;
+  opacity: 0.7;
+}
+
+/* Semester Table Container */
 .semester-content {
   flex: 1;
-  max-width: 500px;
-  text-align: center;
-  background: white;
+  min-width: 280px;
+  max-width: 600px;
+  background: #fff;
+  border-radius: 12px;
   padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .semester-content table {
@@ -217,26 +259,22 @@ nav ul li a {
 .semester-content th,
 .semester-content td {
   border: 1px solid #333;
-  /* table borders */
   padding: 8px;
   text-align: center;
 }
 
 .semester-content th {
   background-color: #4CAF50;
-  /* header background */
   color: white;
-  /* header text color */
 }
 
 .semester-content tr:nth-child(even) {
   background-color: #f2f2f2;
-  /* striped rows */
 }
 
 .semester-content tr:hover {
   background-color: #ddd;
-  /* hover effect */
+  cursor: pointer;
 }
 
 .semester-content p {
@@ -261,6 +299,48 @@ nav ul li a {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 0 20px rgba(43, 178, 240, 0.8), 0 0 40px rgba(43, 178, 240, 0.6);
+  }
+
+  to {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 0 30px rgba(43, 178, 240, 1), 0 0 60px rgba(43, 178, 240, 0.8);
+  }
+}
+
+@keyframes rowFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes cardGlow {
+  from {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1), 0 0 10px rgba(43, 178, 240, 0.5);
+  }
+
+  to {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1), 0 0 20px rgba(43, 178, 240, 0.8);
+  }
+}
+
+@keyframes rohanGlow {
+  from {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1), 0 0 10px rgba(255, 107, 53, 0.5);
+  }
+
+  to {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1), 0 0 20px rgba(255, 107, 53, 0.8);
   }
 }
 
@@ -338,6 +418,13 @@ footer p {
 /* ===================================
   RESPONSIVE DESIGN
 =================================== */
+@media screen and (max-width: 768px) {
+  .container img {
+    width: 100px;
+    height: auto;
+  }
+}
+
 @media (max-width: 1024px) {
   .student-container {
     width: 22%;
@@ -425,7 +512,6 @@ a:visited {
   border-bottom: 1px solid #ddd;
 }
 
-/* CGPA row styling */
 .marks-table .cgpa-row {
   background-color: #e9f7ef;
   font-weight: bold;
@@ -456,4 +542,208 @@ a:visited {
 
 .modal-content .close:hover {
   color: red;
+}
+
+/* ==========================
+   MOBILE RESPONSIVE DESIGN
+========================== */
+@media screen and (max-width: 768px) {
+
+  /* Header */
+  header .container {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+
+  .college-title {
+    font-size: 18px;
+  }
+
+  .college-subtitle {
+    font-size: 14px;
+  }
+
+  .college-tagline,
+  .certification {
+    font-size: 12px;
+  }
+
+  .batch {
+    margin-top: 10px;
+  }
+
+  /* Student Cards */
+  .students-list {
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .student-container {
+    width: 90%;
+    max-width: 280px;
+    margin: 0 auto;
+  }
+
+  .student-container img {
+    width: 120px;
+    height: 120px;
+  }
+
+  .student-name {
+    font-size: 15px;
+  }
+
+  /* Dashboard */
+  .dashboard {
+    padding: 10px;
+    height: auto;
+    overflow-y: visible;
+  }
+
+  /* Modal */
+  .modal-content {
+    width: 95%;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 15px;
+  }
+
+  .modal-content img {
+    width: 120px;
+    height: 160px;
+  }
+
+  .modal-content h2 {
+    font-size: 18px;
+  }
+
+  .modal-content p {
+    font-size: 14px;
+  }
+
+  /* Semester Carousel */
+  .semester-carousel {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .semester-content {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  .semester-arrow {
+    font-size: 1.2rem;
+    padding: 5px 10px;
+  }
+
+  /* Tables */
+  .semester-content table,
+  .marks-table {
+    min-width: 500px;
+  }
+
+  .semester-content {
+    overflow-x: auto;
+  }
+
+  .semester-content th,
+  .semester-content td {
+    padding: 6px;
+    font-size: 12px;
+  }
+
+  /* Footer */
+  footer.fixed-footer {
+    position: relative;
+    margin-top: 20px;
+  }
+
+  /* } */
+
+  /* Small Mobile Devices */
+  @media screen and (max-width: 480px) {
+
+    .college-title {
+      font-size: 16px;
+    }
+
+    .college-subtitle {
+      font-size: 12px;
+    }
+
+    .college-tagline,
+    .certification {
+      font-size: 11px;
+    }
+
+    .student-container {
+      width: 95%;
+    }
+
+    .student-container img {
+      width: 100px;
+      height: 100px;
+    }
+
+    .modal-content {
+      width: 98%;
+      padding: 10px;
+    }
+
+    .close-btn {
+      font-size: 20px;
+      padding: 5px 10px;
+    }
+
+    .semester-arrow {
+      font-size: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .semester-carousel {
+        flex-direction: column;
+      }
+
+      .semester-arrow {
+        width: 100%;
+        max-width: 280px;
+      }
+
+      .semester-content {
+        width: 100%;
+        max-width: 100%;
+      }
+    }
+
+    .semester-arrow:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+  }
+
+    /* .resume-btn {
+      display: inline-block;
+      margin: 12px 0;
+      padding: 10px 20px;
+      background: linear-gradient(135deg, #007bff, #0056b3);
+      color: white;
+      text-decoration: none;
+      border-radius: 25px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+  
+    .resume-btn:hover {
+      background: linear-gradient(135deg, #0056b3, #003f88);
+      transform: translateY(-2px);
+    }
+  
+    .resume-btn:active {
+      transform: scale(0.98);
+    } */
 }

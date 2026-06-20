@@ -11,9 +11,18 @@ document.addEventListener("DOMContentLoaded", function () {
   students.forEach(student => {
     const studentDiv = document.createElement("div");
     studentDiv.classList.add("student-container");
+    if (student.name === 'PENUGONDA ROHAN') {
+      studentDiv.classList.add("rohan-card");
+    }
+
+    // Split name into individual characters
+    const nameChars = student.name.split('').map((char, index) =>
+      `<span class="name-char" style="animation-delay: ${index * 0.1}s">${char}</span>`
+    ).join('');
+
     studentDiv.innerHTML = `
       <img src="${student.image}" alt="${student.name}">
-      <p>${student.name}</p>
+      <p class="student-name">${nameChars}</p>
       <p>${student.rollNumber}</p>
     `;
     studentDiv.addEventListener("click", () => openModal(student.id));
@@ -25,6 +34,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const modalName = document.getElementById("modalName");
   const modalRoll = document.getElementById("modalRoll");
   const modalEmail = document.getElementById("modalEmail");
+  const modalNumber = document.getElementById("modalNumber");
+  const modalResume = document.getElementById("modalResume");
   const semesterCarousel = document.querySelector(".semester-carousel");
 
   let currentStudentId = null;
@@ -55,48 +66,74 @@ document.addEventListener("DOMContentLoaded", function () {
     modalName.textContent = student.name;
     modalRoll.textContent = student.rollNumber;
     modalEmail.textContent = student.emailId || "N/A"; 
+    modalNumber.textContent = student.phoneNumber || "N/A"; 
+    
+
+    if (student.resume) {
+      modalResume.href = student.resume;
+      modalResume.style.display = "inline-block";
+    } else {
+      modalResume.style.display = "none";
+}
 
     currentSemesterIndex = 0;
     renderSemester();
   }
 
-  // Render semester table
-  function renderSemester() {
-    const semesters = Object.keys(marksData[currentStudentId]);
-    if (semesters.length === 0) return;
+function renderSemester() {
+  const semesters = Object.keys(marksData[currentStudentId]);
+  if (semesters.length === 0) return;
 
-    const currentSem = semesters[currentSemesterIndex];
-    const subjects = marksData[currentStudentId][currentSem];
-    const results = calculateResults(currentStudentId)[currentSem];
+  const currentSem = semesters[currentSemesterIndex];
+  const subjects = marksData[currentStudentId][currentSem];
+  const results = calculateResults(currentStudentId)[currentSem];
 
-    // Colors for semesters
-    const colors = ["#d3e913ff", "#4ee6e6ff", "#bf62dbff", "#47e76fff"];
-    const bgColor = colors[currentSemesterIndex % colors.length];
+  // Arrow references
+  const leftArrow = semesterCarousel.querySelector(".semester-arrow.left");
+  const rightArrow = semesterCarousel.querySelector(".semester-arrow.right");
 
-    // Clear existing semester content
-    const existingDiv = semesterCarousel.querySelector(".semester-content");
-    if (existingDiv) existingDiv.remove();
+  // Disable arrows at boundaries
+  leftArrow.disabled = currentSemesterIndex === 0;
+  rightArrow.disabled = currentSemesterIndex === semesters.length - 1;
 
-    const semDiv = document.createElement("div");
-    semDiv.classList.add("semester-content");
-    semDiv.style.backgroundColor = bgColor;
-    semDiv.innerHTML = `
-      <h3>${currentSem.toUpperCase()}</h3>
-      <table border="1" cellpadding="5" cellspacing="0" style="width:100%; border-collapse: collapse;">
-        <tr style="background-color:#ddd;">
-          <th>Subject</th>
-          <th>Total</th>
-          <th>Obtained</th>
+  leftArrow.style.opacity = leftArrow.disabled ? "0.4" : "1";
+  rightArrow.style.opacity = rightArrow.disabled ? "0.4" : "1";
+
+  const colors = ["#d3e913", "#4ee6e6", "#bf62db", "#47e76f"];
+  const bgColor = colors[currentSemesterIndex % colors.length];
+
+  const existingDiv = semesterCarousel.querySelector(".semester-content");
+  if (existingDiv) existingDiv.remove();
+
+  const semDiv = document.createElement("div");
+  semDiv.classList.add("semester-content");
+  semDiv.style.backgroundColor = bgColor;
+
+  semDiv.innerHTML = `
+    <h3>${currentSem.toUpperCase()}</h3>
+    <table border="1" cellpadding="5" cellspacing="0" style="width:100%; border-collapse: collapse;">
+      <tr style="background-color:#ddd;">
+        <th>Subject</th>
+        <th>Total</th>
+        <th>Obtained</th>
+      </tr>
+      ${subjects.map((s, index) => `
+        <tr class="table-row" style="animation: rowFadeIn 0.5s ease ${index * 0.1}s both;">
+          <td>${s.subject}</td>
+          <td>${s.total}</td>
+          <td>${s.obtained}</td>
         </tr>
-        ${subjects.map(s => `<tr><td>${s.subject}</td><td>${s.total}</td><td>${s.obtained}</td></tr>`).join('')}
-      </table>
-      <p><strong>Total:</strong> ${results.obtainedMarks}/${results.totalMarks}</p>
-      <p><strong>Percentage:</strong> ${results.percentage}%</p>
-    `;
-    semesterCarousel.insertBefore(
+      `).join("")}
+    </table>
+
+    <p><strong>Total:</strong> ${results.obtainedMarks}/${results.totalMarks}</p>
+    <p><strong>Percentage:</strong> ${results.percentage}%</p>
+  `;
+
+  semesterCarousel.insertBefore(
     semDiv,
     semesterCarousel.querySelector(".semester-arrow.right")
-);
+  );
 }
 
   // Change semester
